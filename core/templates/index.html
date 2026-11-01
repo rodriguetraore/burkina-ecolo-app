@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Mes Projets Eco Tech</title>
+</head>
+<body class="p-8 bg-gray-100">
+    <div class="max-w-md mx-auto bg-white p-6 rounded shadow">
+        <h1 class="text-xl font-bold mb-4">Ajouter un projet</h1>
+        <form method="POST" class="space-y-4">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+            <div>
+                {{ form.titre }}
+                {{ form.titre.errors }}
+            </div>
+            <div>
+                {{ form.description }}
+                {{ form.description.errors }}
+            </div>
+            <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded">Enregistrer</button>
+        </form>
+
+        <h2 class="text-lg font-bold mt-8 mb-2">Liste des projets</h2>
+        <ul>
+            {% for p in projets %}
+                <li class="border-b py-2"><strong>{{ p.titre }}</strong> : {{ p.description }}</li>
+            {% empty %}
+                <li>Aucun projet enregistré.</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
